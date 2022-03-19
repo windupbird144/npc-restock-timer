@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "restockTimer.js",
+  "scripts": {
+    "build" : "tsc && node transform.js",
+    "dev" : "fd | entr npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

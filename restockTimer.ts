@@ -15,9 +15,8 @@ const timingVersion = "0"
 const newTimer = () => <Timer>{start: Date.now(), stop: -1}
 const stopTimer = (t: Timer) => <Timer>{start: t.start, stop: Date.now()}
 const durationMs = (t: Timer) => t.stop - t.start
-const isRunning = (t: Timer) => t.stop > -1
 const save = (t: Timer) => localStorage.setItem('timer', JSON.stringify(t))
-const load = () => JSON.parse(localStorage.getItem('timer')) as Timer | null
+const load = () => JSON.parse(localStorage.getItem('timer')!) as Timer | null
 
 // Reset the timer and saves it. Only runs when you visit or refresh a shop
 function resetTimer() {
@@ -30,7 +29,6 @@ function resetTimer() {
 
 // Stops the timer and displays the duration on the page
 function stopAndDisplayTimer() {
-    const now = new Date()
     const target = document.querySelector(`button[onclick*='viewshop']`)
     if (!target) {
         return
