@@ -9,7 +9,7 @@ type Timer = {
     stop: number
 }
 
-// If you change the way time is measured, update the version. Otherwise you 
+// If you change the way time is measured, update the version
 const timingVersion = "0"
 
 const newTimer = () => <Timer>{start: Date.now(), stop: -1}
@@ -41,26 +41,9 @@ function stopAndDisplayTimer() {
     }
     timer = stopTimer(timer)
     const seconds = (durationMs(timer) / 1000).toFixed(3)
-    const lastReset = sinceLastReset(now)
     const msg = `You restocked this item in ${seconds} seconds.`
-    const msg2 = `The shops reset ${format(lastReset)} ago.`
-    const html = `<div title="timing version ${timingVersion}"><b>${msg}<br>${msg2}</b></div><br>`
-    target.insertAdjacentHTML('beforebegin', html)
-}
-
-
-function format(time: {mins: number, secs: number}) : string {
-    return time.mins
-        ? `${time.mins} minute${time.mins > 1 ? 's' : ''} and ${time.secs} seconds`
-        : `${time.secs} seconds`
-}
-
-// Returns the minutes and seconds(rounded) since the last reset
-function sinceLastReset(d: Date) {
-    const mins = d.getUTCMinutes() % 6
-    // round to the closest second
-    const secs = Math.round(d.getUTCSeconds() + d.getUTCMilliseconds()/1000)
-    return { mins, secs }
+    const html = `<div title="timing version ${timingVersion}"><br><b>${msg}</b></div>`
+    target.insertAdjacentHTML('afterend', html)
 }
 
 // If you run resetTimer, do not run stopAndDisplayTimer and vice verse
